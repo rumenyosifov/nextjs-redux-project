@@ -1,0 +1,36 @@
+.header {
+  text-align: center;
+}
+.container {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.navUl {
+  margin: 1rem 0 0.5rem;
+  text-align: center;
+  padding: 0;
+}
+.navUl li {
+  display: inline;
+}
+.nav a {
+  display: inline-block;
+  padding: 0.5rem 1.5rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  color: #343534;
+  text-decoration: none;
+}
+.logo {
+  font-size: 2rem;
+  font-weight: bold;
+}
+@media (max-width: 770px) {
+  .container {
+    flex-direction: column;
+  }
+}

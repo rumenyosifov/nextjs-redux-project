@@ -1,0 +1,48 @@
+.imageClass {
+  max-height: 138px;
+  max-width: 100%;
+  margin: 0 auto;
+  display: block;
+}
+.column {
+  display: flex;
+  flex: 1 1 100%;
+  max-width: 25%;
+  padding: 0 5px;
+  margin-bottom: 20px;
+}
+.name {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.card {
+  flex: 1;
+  border: solid 1px #cccccc;
+  cursor: pointer;
+}
+.info {
+  padding: 5px;
+  text-align: center;
+}
+.bold {
+  font-weight: 700;
+}
+@media (max-width: 1200px) {
+  .column {
+    flex: 1 1 100%;
+    max-width: 50%;
+  }
+  .imageClass {
+    max-height: 227px;
+  }
+}
+
+@media (max-width: 576px) {
+  .column {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+  .imageClass {
+    max-height: 227px;
+  }
+}

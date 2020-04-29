@@ -1,0 +1,31 @@
+.container {
+  margin-top: 20px;
+}
+
+.deteils {
+  display: flex;
+  justify-content: center;
+}
+
+.bold {
+  font-weight: 700;
+}
+.imgDiv {
+  margin-right: 10px;
+}
+
+.imageClass {
+  max-height: 350px;
+  max-width: 100%;
+}
+
+.name {
+  font-size: 2rem;
+}
+@media (max-width: 720px) {
+  .deteils {
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+}

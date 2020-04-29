@@ -1,0 +1,35 @@
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.options select,
+.options button {
+  margin-left: 5px;
+}
+
+.options button {
+  padding: 2px 7px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 3px 6px;
+  cursor: pointer;
+  background-color: whitesmoke;
+  color: black;
+  border: 2px solid #cccccc;
+}
+
+.buttons {
+  margin-left: auto;
+  margin: 10px 0;
+}
+
+@media (min-width: 992px) {
+  .showFilter {
+    display: none;
+  }
+}
