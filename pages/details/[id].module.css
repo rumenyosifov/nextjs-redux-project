@@ -1,31 +1,94 @@
-.container {
-  margin-top: 20px;
+.box {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background-color: white;
 }
 
 .deteils {
   display: flex;
   justify-content: center;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
 }
 
-.bold {
-  font-weight: 700;
-}
 .imgDiv {
   margin-right: 10px;
+  display: flex;
+  flex: 1 1 60%;
 }
-
 .imageClass {
-  max-height: 350px;
+  max-height: 450px;
   max-width: 100%;
+  margin: auto;
 }
 
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1 1 40%;
+  text-align: center;
+}
+.infoDiv {
+  display: flex;
+  text-align: left;
+}
+.mainInfo {
+  flex: 1;
+  font-size: 1.2rem;
+}
 .name {
   font-size: 2rem;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+.name a {
+  margin: auto;
+}
+.additionalInfo {
+  flex: 1;
+  text-align: center;
+  font-size: 1.3rem;
+}
+.mainInfo > div {
+  display: flex;
+}
+.mainInfo span {
+  flex: 1;
+  text-align: left;
+  margin: 1px 5px;
+}
+.mainInfo span.bold {
+  font-weight: 600;
+  text-align: right;
+}
+
+.parentSpan a {
+  color: #2196f3;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.parentSpan a:hover {
+  color: #73c1ff;
 }
 @media (max-width: 720px) {
   .deteils {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    border-bottom: 1px solid #ccc;
+  }
+  .imgDiv {
+    margin-right: 0;
+  }
+}
+@media (max-width: 768px) {
+  .name {
+    font-size: 1.6rem;
+  }
+  .mainInfo {
+    font-size: 1.2rem;
   }
 }

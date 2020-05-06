@@ -1,16 +1,22 @@
 import React from "react";
 import styles from "./options.module.css";
 import PropTypes from "prop-types";
+import cn from "classnames";
 import { PER_PAGE_ARRAY, SORT_ORDER_ARRAY } from "../../lib/constants";
+import { MdFormatListBulleted, MdApps } from "react-icons/md";
 
 const Options = (props) => {
   return (
     <div className={styles.options}>
       <div className={styles.results}>
-        <h2>all: {props.dataCount}</h2>
+        <h3>Results: {props.dataCount}</h3>
       </div>
       <div className={styles.buttons}>
-        <select onChange={(e) => props.onSelectSort(e.target.value)} value={props.order}>
+        <select
+          className={styles.orderDropdown}
+          onChange={(e) => props.onSelectSort(e.target.value)}
+          value={props.order}
+        >
           <option value="">Order By</option>
           {SORT_ORDER_ARRAY.map((elem) => (
             <option key={elem.field} value={elem.field}>
@@ -25,10 +31,21 @@ const Options = (props) => {
             </option>
           ))}
         </select>
+        <button
+          className={cn(styles.gridButton, { [styles.active]: !props.showGrid })}
+          onClick={() => props.setShowGrid(false)}
+        >
+          <MdFormatListBulleted />
+        </button>
+        <button
+          className={cn(styles.gridButton, { [styles.active]: props.showGrid })}
+          onClick={() => props.setShowGrid(true)}
+        >
+          <MdApps />
+        </button>
         <button className={styles.showFilter} onClick={() => props.setShowFilter(!props.showFilter)}>
           Filters
         </button>
-        <div className={styles.order}></div>
       </div>
     </div>
   );
@@ -42,6 +59,8 @@ Options.propTypes = {
   onSelectSort: PropTypes.func.isRequired,
   onSelectPerPage: PropTypes.func.isRequired,
   setShowFilter: PropTypes.func.isRequired,
+  showGrid: PropTypes.bool.isRequired,
+  setShowGrid: PropTypes.func.isRequired,
 };
 
 export default Options;

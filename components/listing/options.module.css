@@ -6,30 +6,62 @@
   align-items: center;
 }
 
+.results {
+  flex: 1;
+}
+.results h4 {
+  margin: 6px 0;
+}
+
 .options select,
 .options button {
-  margin-left: 5px;
+  margin: 0 3px;
 }
 
 .options button {
-  padding: 2px 7px;
+  padding: 5px 10px;
   text-align: center;
+  line-height: 0;
   text-decoration: none;
-  font-size: 16px;
-  margin: 3px 6px;
+  font-size: 1rem;
   cursor: pointer;
-  background-color: whitesmoke;
-  color: black;
-  border: 2px solid #cccccc;
+  background-color: #2196f3;
+  color: white;
+  border: 0px;
 }
 
 .buttons {
-  margin-left: auto;
-  margin: 10px 0;
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
+  margin: 10px -3px;
+}
+.gridButton.active {
+  background-color: #75c2ff;
 }
 
 @media (min-width: 992px) {
   .showFilter {
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .buttons {
+    justify-content: space-between;
+    margin: 10px 0;
+  }
+  .options select,
+  .options button {
+    margin: 0;
+  }
+}
+
+@media (max-width: 390px) {
+  .orderDropdown {
+    max-width: 115px;
+  }
+  .gridButton.active {
     display: none;
   }
 }

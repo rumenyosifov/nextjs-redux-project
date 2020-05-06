@@ -4,31 +4,38 @@ import { useRouter } from "next/router";
 import ListingComponent from "../components/listing/listingComponent";
 import Head from "next/head";
 import { useSelector } from "react-redux";
+import LoadingRing from "../components/listing/loadingRing";
 
 export const Listing = () => {
   const router = useRouter();
   const storeData = useSelector((state) => state.townData.data);
+  const loading = useSelector((state) => state.townData.loading);
   const { city, name, hair_color } = router.query;
   const title =
     "Citizens listing for " +
     (city ? city : Object.keys(storeData)[0]) +
     (name ? ", with name containing " + name : "") +
     (hair_color ? ", with hair color " + hair_color : "");
+
   return (
     <>
       <Head>
         <title>{title}</title>
       </Head>
       <div className="container">
-        <ListingComponent routerQuery={router.query} storeData={storeData} />
+        {loading ? <LoadingRing /> : <ListingComponent routerQuery={router.query} storeData={storeData} />}
       </div>
     </>
   );
 };
 
-Listing.getInitialProps = async ({ store }) => {
+Listing.getInitialProps = async ({ store, req }) => {
   if (Object.keys(store.getState().townData.data).length === 0) {
-    await store.dispatch(fetchTownData());
+    if (req) {
+      await store.dispatch(fetchTownData());
+    } else {
+      store.dispatch(fetchTownData());
+    }
   }
   return {};
 };

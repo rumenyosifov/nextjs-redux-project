@@ -1,5 +1,9 @@
-.list {
+.listGrid {
   display: flex;
   flex-wrap: wrap;
   margin: 0 -5px;
+}
+.listLine {
+  display: flex;
+  flex-direction: column;
 }

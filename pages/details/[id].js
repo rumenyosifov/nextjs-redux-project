@@ -4,9 +4,12 @@ import { fetchTownData } from "../../redux/actions";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import styles from "./[id].module.css";
+import Link from "next/link";
+import LoadingRing from "../../components/listing/loadingRing";
 
 const Details = () => {
   const storeData = useSelector((state) => state.townData.data);
+  const loading = useSelector((state) => state.townData.loading);
   const router = useRouter();
   const { id } = router.query;
   let citizen;
@@ -22,41 +25,85 @@ const Details = () => {
       <Head>
         <title>Create Next App</title>
       </Head>
-      <div className={`container ${styles.container}`}>
-        <div className={styles.deteils}>
-          <div className={styles.imgDiv}>
-            <img className={styles.imageClass} src={citizen.thumbnail} alt={citizen.name} />
+      <div className="container">
+        {loading ? (
+          <LoadingRing />
+        ) : (
+          <div className={styles.box}>
+            <div className={styles.deteils}>
+              <div className={styles.imgDiv}>
+                <img className={styles.imageClass} src={citizen.thumbnail} alt={citizen.name} />
+              </div>
+              <div className={styles.info}>
+                <div className={styles.name}>
+                  <h2 className={styles.name}>{citizen.name}</h2>
+                </div>
+                <div className={styles.mainInfo}>
+                  <div>
+                    <span className={styles.bold}>Age: </span>
+                    <span>{citizen.age} years</span>
+                  </div>
+                  <div>
+                    <span className={styles.bold}>Height: </span>
+                    <span>{Math.round(citizen.height)} cm</span>
+                  </div>
+                  <div>
+                    <span className={styles.bold}>Weight: </span>
+                    <span>{Math.round(citizen.weight)} cm</span>
+                  </div>
+                  <div>
+                    <span className={styles.bold}>Hair color: </span>
+                    <span>{citizen.hair_color}</span>
+                  </div>
+                  <div>
+                    <span className={styles.bold}>Gender: </span>
+                    <span>{/^\S+(te|ia|li)\s/i.test(citizen.name) ? "Female" : "Male"}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className={styles.additionalInfo}>
+              {citizen.friends.length !== 0 && (
+                <div>
+                  <span className={styles.bold}>Friends: </span>
+                  <span className={styles.parentSpan}>
+                    {citizen.friends.map((friend, index) => (
+                      <span>
+                        <Link href={`/listing?name=${friend}`}>{friend}</Link>
+                        {citizen.friends.length - 1 > index && ", "}
+                      </span>
+                    ))}
+                  </span>
+                </div>
+              )}
+              {citizen.professions.length !== 0 && (
+                <div>
+                  <span className={styles.bold}>Professions: </span>
+                  <span className={styles.parentSpan}>
+                    {citizen.professions.map((profession, index) => (
+                      <span>
+                        <Link href={`/listing?professions=${profession}`}>{profession}</Link>
+                        {citizen.professions.length - 1 > index && ", "}
+                      </span>
+                    ))}
+                  </span>
+                </div>
+              )}
+            </div>
           </div>
-          <div className={styles.info}>
-            <h2 className={styles.name}>{citizen.name}</h2>
-            <div>
-              <span className={styles.bold}>Age: </span> {citizen.age}
-            </div>
-            <div>
-              <span className={styles.bold}>Height: </span> {citizen.height}
-            </div>
-            <div>
-              <span className={styles.bold}>Weight: </span> {citizen.weight}
-            </div>
-            <div>
-              <span className={styles.bold}>Hair color: </span> {citizen.hair_color}
-            </div>
-            <div>
-              <span className={styles.bold}>Friends: </span> {citizen.friends.join(", ")}
-            </div>
-            <div>
-              <span className={styles.bold}>Professions: </span> {citizen.professions.join(", ")}
-            </div>
-          </div>
-        </div>
+        )}
       </div>
     </>
   );
 };
 
-Details.getInitialProps = async ({ store }) => {
+Details.getInitialProps = async ({ store, req }) => {
   if (Object.keys(store.getState().townData.data).length === 0) {
-    await store.dispatch(fetchTownData());
+    if (req) {
+      await store.dispatch(fetchTownData());
+    } else {
+      store.dispatch(fetchTownData());
+    }
   }
   return {};
 };

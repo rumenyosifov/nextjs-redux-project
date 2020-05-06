@@ -1,9 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
 import styles from "./header.module.css";
 import Link from "next/link";
 
-const Header = (props) => {
+const Header = () => {
   return (
     <header className={styles.header}>
       <div className={`container ${styles.container}`}>
@@ -28,7 +27,5 @@ const Header = (props) => {
     </header>
   );
 };
-
-Header.propTypes = {};
 
 export default Header;
