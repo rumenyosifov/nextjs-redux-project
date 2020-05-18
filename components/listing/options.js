@@ -14,17 +14,16 @@ const Options = (props) => {
       <div className={styles.buttons}>
         <select
           className={styles.orderDropdown}
-          onChange={(e) => props.onSelectSort(e.target.value)}
+          onChange={(e) => props.onFilter("order", e.target.value)}
           value={props.order}
         >
-          <option value="">Order By</option>
           {SORT_ORDER_ARRAY.map((elem) => (
             <option key={elem.field} value={elem.field}>
               {elem.text}
             </option>
           ))}
         </select>
-        <select onChange={(e) => props.onSelectPerPage(e.target.value)} value={props.perPage}>
+        <select onChange={(e) => props.onFilter("perPage", e.target.value)} value={props.perPage}>
           {PER_PAGE_ARRAY.map((elem) => (
             <option key={elem} value={elem}>
               {elem}
@@ -32,14 +31,14 @@ const Options = (props) => {
           ))}
         </select>
         <button
-          className={cn(styles.gridButton, { [styles.active]: !props.showGrid })}
-          onClick={() => props.setShowGrid(false)}
+          className={cn(styles.gridButton, { [styles.active]: props.view === "line" })}
+          onClick={() => props.onFilter("view", "line")}
         >
           <MdFormatListBulleted />
         </button>
         <button
-          className={cn(styles.gridButton, { [styles.active]: props.showGrid })}
-          onClick={() => props.setShowGrid(true)}
+          className={cn(styles.gridButton, { [styles.active]: props.view === "grid" })}
+          onClick={() => props.onFilter("view", "grid")}
         >
           <MdApps />
         </button>
@@ -53,14 +52,12 @@ const Options = (props) => {
 
 Options.propTypes = {
   dataCount: PropTypes.number.isRequired,
-  order: PropTypes.string.isRequired,
   perPage: PropTypes.number.isRequired,
+  order: PropTypes.string.isRequired,
+  view: PropTypes.string.isRequired,
   showFilter: PropTypes.bool.isRequired,
-  onSelectSort: PropTypes.func.isRequired,
-  onSelectPerPage: PropTypes.func.isRequired,
+  onFilter: PropTypes.func.isRequired,
   setShowFilter: PropTypes.func.isRequired,
-  showGrid: PropTypes.bool.isRequired,
-  setShowGrid: PropTypes.func.isRequired,
 };
 
 export default Options;

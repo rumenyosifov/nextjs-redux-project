@@ -45,19 +45,22 @@
     display: none;
   }
 }
-
+@media (max-width: 525px) {
+  .options {
+    flex-direction: column;
+  }
+  .results h3 {
+    margin: 0px;
+  }
+}
 @media (max-width: 400px) {
   .buttons {
     justify-content: space-between;
     margin: 10px 0;
   }
-  .options select,
-  .options button {
-    margin: 0;
-  }
 }
 
-@media (max-width: 390px) {
+@media (max-width: 400px) {
   .orderDropdown {
     max-width: 115px;
   }

@@ -10,6 +10,7 @@ import LoadingRing from "../../components/listing/loadingRing";
 const Details = () => {
   const storeData = useSelector((state) => state.townData.data);
   const loading = useSelector((state) => state.townData.loading);
+  const filtersSelected = useSelector((state) => state.townData.filtersSelected);
   const router = useRouter();
   const { id } = router.query;
   let citizen;
@@ -68,8 +69,10 @@ const Details = () => {
                   <span className={styles.bold}>Friends: </span>
                   <span className={styles.parentSpan}>
                     {citizen.friends.map((friend, index) => (
-                      <span>
-                        <Link href={`/listing?name=${friend}`}>{friend}</Link>
+                      <span key={index}>
+                        <Link href={`/listing?name=${friend}${filtersSelected.view === "line" ? "&view=line" : ""}`}>
+                          <a>{friend}</a>
+                        </Link>
                         {citizen.friends.length - 1 > index && ", "}
                       </span>
                     ))}
@@ -81,8 +84,14 @@ const Details = () => {
                   <span className={styles.bold}>Professions: </span>
                   <span className={styles.parentSpan}>
                     {citizen.professions.map((profession, index) => (
-                      <span>
-                        <Link href={`/listing?professions=${profession}`}>{profession}</Link>
+                      <span key={index}>
+                        <Link
+                          href={`/listing?professions=${profession}${
+                            filtersSelected.view === "line" ? "&view=line" : ""
+                          }`}
+                        >
+                          <a>{profession}</a>
+                        </Link>
                         {citizen.professions.length - 1 > index && ", "}
                       </span>
                     ))}

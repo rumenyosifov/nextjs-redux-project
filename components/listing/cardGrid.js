@@ -7,23 +7,27 @@ import { MdSearch } from "react-icons/md";
 const CardGrid = (props) => {
   return (
     <div className={styles.column}>
-      <Link href="/details/[id]" as={`/details/${props.citizen.id}`} shallow={true}>
-        <div className={styles.card}>
-          <div className={styles.imageDiv}>
-            <img className={styles.imageClass} src={props.citizen.thumbnail} alt={props.citizen.name} />
-          </div>
-          <div className={styles.info}>
-            <div className={styles.name}>
-              <a>{props.citizen.name}</a>
-            </div>
-          </div>
-          <div className={styles.viewButton}>
-            <span>
-              <MdSearch /> View
-            </span>
-          </div>
+      <div className={styles.card}>
+        <div className={styles.imageDiv}>
+          <Link href="/details/[id]" as={`/details/${props.citizen.id}`} shallow={true}>
+            <a>
+              <img className={styles.imageClass} src={props.citizen.thumbnail} alt={props.citizen.name} />
+            </a>
+          </Link>
         </div>
-      </Link>
+        <div className={styles.info}>
+          <Link href="/details/[id]" as={`/details/${props.citizen.id}`} shallow={true}>
+            <a>{props.citizen.name}</a>
+          </Link>
+        </div>
+        <div className={styles.viewButton}>
+          <Link href="/details/[id]" as={`/details/${props.citizen.id}`} shallow={true}>
+            <a>
+              <MdSearch /> View
+            </a>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };

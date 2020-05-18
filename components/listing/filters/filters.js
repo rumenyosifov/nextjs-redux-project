@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Checkbox from "./checkbox";
 import styles from "./filters.module.css";
@@ -6,6 +6,16 @@ import FilterBox from "./filterBox";
 import SliderFilter from "./sliderFilter";
 
 const Filters = (props) => {
+  const [nameFilter, setNameFilter] = useState(props.filtersSelected.name);
+  const handleOnSelectNameFilter = (e) => {
+    if (e.key === "Enter") {
+      props.onFilter("name", e.target.value);
+    }
+  };
+  useEffect(() => {
+    if (nameFilter !== props.filtersSelected.name) setNameFilter(props.filtersSelected.name);
+  }, [props.filtersSelected.name]);
+
   return (
     <>
       <div className={styles.divCloseButton}>
@@ -16,112 +26,134 @@ const Filters = (props) => {
       <FilterBox title="City">
         <select
           className={styles.dropdown}
-          onChange={(e) => props.onSelectOption(e.target.value, "city")}
-          value={props.city}
+          onChange={(e) => props.onFilter("city", e.target.value)}
+          value={props.filtersSelected.city}
         >
-          {props.citiesArr.map((elem) => (
+          {props.citiesOptions.map((elem) => (
             <option className={styles.dropdownOption} key={elem} value={elem}>
               {elem}
             </option>
           ))}
         </select>
       </FilterBox>
-      <FilterBox title="Name" onClearFilter={() => props.onClearFilter("name")} showClearFilter={!!props.filter}>
+      <FilterBox
+        title="Name"
+        onClearFilter={() => props.onFilter("name", "")}
+        showClearFilter={!!props.filtersSelected.name}
+      >
         <input
           className={styles.form}
           placeholder="Search"
           name="fileter"
           type="text"
-          onKeyPress={(e) => props.onSelectFilter(e, "name")}
-          onChange={(e) => props.setFilter(e.target.value)}
-          value={props.filter}
+          onKeyPress={(e) => handleOnSelectNameFilter(e)}
+          onChange={(e) => setNameFilter(e.target.value)}
+          value={nameFilter}
         />
       </FilterBox>
       <FilterBox
         title="Profession"
-        onClearFilter={() => props.onClearFilter("professions")}
-        showClearFilter={props.professions.length !== 0}
+        onClearFilter={() => props.onFilter("professions", [])}
+        showClearFilter={props.filtersSelected.professions.length !== 0}
       >
-        {props.allProfessions.map((profession, key) => (
+        {props.professionsOptions.map((profession, key) => (
           <Checkbox
             key={key}
             field="professions"
             value={profession}
-            checked={props.professions.indexOf(profession) !== -1}
-            onSelectCheckbox={props.onSelectCheckbox}
+            checked={props.filtersSelected.professions.indexOf(profession) !== -1}
+            onFilter={props.onFilter}
           />
         ))}
       </FilterBox>
       <FilterBox
         title="Hair Color"
-        onClearFilter={() => props.onClearFilter("hair_color")}
-        showClearFilter={props.hair_color.length !== 0}
+        onClearFilter={() => props.onFilter("hair_color", [])}
+        showClearFilter={props.filtersSelected.hair_color.length !== 0}
       >
-        {props.allHairColors.map((hairColor, key) => (
+        {props.hairColorsOptions.map((hairColor, key) => (
           <Checkbox
             key={key}
             field="hair_color"
             value={hairColor}
-            checked={props.hair_color.indexOf(hairColor) !== -1}
-            onSelectCheckbox={props.onSelectCheckbox}
+            checked={props.filtersSelected.hair_color.indexOf(hairColor) !== -1}
+            onFilter={props.onFilter}
           />
         ))}
       </FilterBox>
       <FilterBox
         title="Age"
-        onClearFilter={() => props.onClearFilter("age")}
-        showClearFilter={props.age.min !== props.minMaxAges.min || props.age.max !== props.minMaxAges.max}
+        onClearFilter={() => props.onFilter("age", [])}
+        showClearFilter={
+          !!props.filtersSelected.age.length &&
+          (props.filtersSelected.age[0] !== props.minMaxSliders.age.min ||
+            props.filtersSelected.age[1] !== props.minMaxSliders.age.max)
+        }
       >
         <SliderFilter
-          minMaxValues={props.minMaxAges}
-          values={props.age}
+          minValue={props.minMaxSliders.age.min}
+          maxValue={props.minMaxSliders.age.max}
+          minSelected={props.filtersSelected.age[0] || props.minMaxSliders.age.min}
+          maxSelected={props.filtersSelected.age[1] || props.minMaxSliders.age.max}
           fieldName="age"
           units="years"
-          onMoveSlider={props.onMoveSlider}
+          onFilter={props.onFilter}
         />
       </FilterBox>
       <FilterBox
         title="Height"
-        onClearFilter={() => props.onClearFilter("height")}
-        showClearFilter={props.height.min !== props.minMaxHeights.min || props.height.max !== props.minMaxHeights.max}
+        onClearFilter={() => props.onFilter("height", [])}
+        showClearFilter={
+          !!props.filtersSelected.height.length &&
+          (props.filtersSelected.height[0] !== props.minMaxSliders.height.min ||
+            props.filtersSelected.height[1] !== props.minMaxSliders.height.max)
+        }
       >
         <SliderFilter
-          minMaxValues={props.minMaxHeights}
-          values={props.height}
+          minValue={props.minMaxSliders.height.min}
+          maxValue={props.minMaxSliders.height.max}
+          minSelected={props.filtersSelected.height[0] || props.minMaxSliders.height.min}
+          maxSelected={props.filtersSelected.height[1] || props.minMaxSliders.height.max}
           fieldName="height"
           units="cm"
-          onMoveSlider={props.onMoveSlider}
+          onFilter={props.onFilter}
         />
       </FilterBox>
       <FilterBox
         title="Weight"
-        onClearFilter={() => props.onClearFilter("weight")}
-        showClearFilter={props.weight.min !== props.minMaxWeights.min || props.weight.max !== props.minMaxWeights.max}
+        onClearFilter={() => props.onFilter("weight", [])}
+        showClearFilter={
+          !!props.filtersSelected.weight.length &&
+          (props.filtersSelected.weight[0] !== props.minMaxSliders.weight.min ||
+            props.filtersSelected.weight[1] !== props.minMaxSliders.weight.max)
+        }
       >
         <SliderFilter
-          minMaxValues={props.minMaxWeights}
-          values={props.weight}
+          minValue={props.minMaxSliders.weight.min}
+          maxValue={props.minMaxSliders.weight.max}
+          minSelected={props.filtersSelected.weight[0] || props.minMaxSliders.weight.min}
+          maxSelected={props.filtersSelected.weight[1] || props.minMaxSliders.weight.max}
           fieldName="weight"
           units="kg"
-          onMoveSlider={props.onMoveSlider}
+          onFilter={props.onFilter}
         />
       </FilterBox>
       <FilterBox
         title="Gender"
-        onClearFilter={() => props.onClearFilter("gender")}
-        showClearFilter={!!props.gender.length}
+        onClearFilter={() => props.onFilter("gender", [])}
+        showClearFilter={!!props.filtersSelected.gender.length}
       >
         <Checkbox
           field="gender"
           value="Male"
-          checked={props.gender.indexOf("Male") !== -1}
-          onSelectCheckbox={props.onSelectCheckbox}
+          checked={props.filtersSelected.gender.indexOf("Male") !== -1}
+          onFilter={props.onFilter}
         />
         <Checkbox
           field="gender"
           value="Female"
-          checked={props.gender.indexOf("Female") !== -1}
-          onSelectCheckbox={props.onSelectCheckbox}
+          checked={props.filtersSelected.gender.indexOf("Female") !== -1}
+          onFilter={props.onFilter}
         />
       </FilterBox>
     </>
@@ -129,24 +161,13 @@ const Filters = (props) => {
 };
 
 Filters.propTypes = {
-  onSelectFilter: PropTypes.func.isRequired,
-  setFilter: PropTypes.func.isRequired,
-  professions: PropTypes.array.isRequired,
-  hair_color: PropTypes.array.isRequired,
-  allProfessions: PropTypes.array.isRequired,
-  allHairColors: PropTypes.array.isRequired,
-  allHairColors: PropTypes.array.isRequired,
-  age: PropTypes.object.isRequired,
-  minMaxAges: PropTypes.object.isRequired,
-  height: PropTypes.object.isRequired,
-  minMaxHeights: PropTypes.object.isRequired,
-  weight: PropTypes.object.isRequired,
-  minMaxWeights: PropTypes.object.isRequired,
-  onSelectCheckbox: PropTypes.func.isRequired,
-  onMoveSlider: PropTypes.func.isRequired,
-  onClearFilter: PropTypes.func.isRequired,
+  filtersSelected: PropTypes.object.isRequired,
+  citiesOptions: PropTypes.array.isRequired,
+  professionsOptions: PropTypes.array.isRequired,
+  hairColorsOptions: PropTypes.array.isRequired,
+  minMaxSliders: PropTypes.object.isRequired,
   showFilter: PropTypes.bool.isRequired,
+  onFilter: PropTypes.func.isRequired,
   setShowFilter: PropTypes.func.isRequired,
-  gender: PropTypes.string.isRequired,
 };
 export default Filters;

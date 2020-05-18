@@ -31,6 +31,8 @@
 
 .filterContent {
   margin-top: 10px;
+  overflow-y: auto;
+  max-height: 300px;
 }
 .contentHidden .filterContent {
   display: none;

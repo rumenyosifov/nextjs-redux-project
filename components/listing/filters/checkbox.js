@@ -9,7 +9,7 @@ const Checkbox = (props) => {
       <input
         type="checkbox"
         checked={props.checked}
-        onChange={(e) => props.onSelectCheckbox(props.value, props.field, e.target.checked)}
+        onChange={(e) => props.onFilter(props.field, props.value, e.target.checked)}
       />
       <span className={styles.checkmark}></span>
     </label>
@@ -20,7 +20,7 @@ Checkbox.propTypes = {
   field: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   checked: PropTypes.bool.isRequired,
-  onSelectCheckbox: PropTypes.func.isRequired,
+  onFilter: PropTypes.func.isRequired,
 };
 
 export default Checkbox;

@@ -11,13 +11,13 @@ const Pagination = (props) => {
     <span
       key={number}
       className={cn({ [styles.active]: number === activePage })}
-      onClick={() => props.handleOnSelectPage(number)}
+      onClick={() => props.onFilter("page", number)}
     >
       {number}
     </span>
   );
 
-  if (activePage > 1) items.push(<span onClick={() => props.handleOnSelectPage(activePage - 1)}>&laquo;</span>);
+  if (activePage > 1) items.push(<span onClick={() => props.onFilter("page", activePage - 1)}>&laquo;</span>);
   if (activePage > 1 && activePage < pagesCount) {
     items.push(getNumber(activePage - 1));
     items.push(getNumber(activePage));
@@ -33,7 +33,7 @@ const Pagination = (props) => {
   }
   if (activePage < pagesCount)
     items.push(
-      <span key="last" onClick={() => props.handleOnSelectPage(activePage + 1)}>
+      <span key="last" onClick={() => props.onFilter("page", activePage + 1)}>
         &raquo;
       </span>
     );
@@ -44,7 +44,7 @@ Pagination.propTypes = {
   count: PropTypes.number.isRequired,
   activePage: PropTypes.number.isRequired,
   perPage: PropTypes.number.isRequired,
-  handleOnSelectPage: PropTypes.func.isRequired,
+  onFilter: PropTypes.func.isRequired,
 };
 
 export default Pagination;

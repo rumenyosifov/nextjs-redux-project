@@ -29,7 +29,7 @@ const FilterBox = (props) => {
 FilterBox.propTypes = {
   title: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
-  showClearFilter: PropTypes.func.isRequired,
+  showClearFilter: PropTypes.bool,
   onClearFilter: PropTypes.func,
 };
 

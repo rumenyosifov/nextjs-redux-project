@@ -4,8 +4,8 @@ import styles from "./sliderFilter.module.css";
 
 const SliderFilter = (props) => {
   const [slideValues, setSlideValues] = useState({
-    min: props.values.min || props.minMaxValues.min,
-    max: props.values.max || props.minMaxValues.max,
+    min: props.minSelected,
+    max: props.maxSelected,
   });
 
   const handleChangeLowerValue = (value) => {
@@ -20,38 +20,38 @@ const SliderFilter = (props) => {
   };
 
   useEffect(() => {
-    if (props.values.min !== slideValues.min || props.values.max !== slideValues.max) {
-      setSlideValues({ min: props.values.min, max: props.values.max });
+    if (props.minSelected !== slideValues.min || props.maxSelected !== slideValues.max) {
+      setSlideValues({ min: props.minSelected, max: props.maxSelected });
     }
-  }, [props.values]);
+  }, [props.minSelected, props.maxSelected]);
 
   return (
     <div className={styles.sliderDiv}>
       <span className={styles.multiRange}>
         <input
           type="range"
-          min={props.minMaxValues.min}
-          max={props.minMaxValues.max}
+          min={props.minValue}
+          max={props.maxValue}
           value={slideValues.min}
           onChange={(e) => handleChangeLowerValue(+e.target.value)}
           onMouseUp={() => {
-            props.onMoveSlider(slideValues, props.fieldName);
+            props.onFilter(props.fieldName, [slideValues.min, slideValues.max]);
           }}
           onTouchEnd={() => {
-            props.onMoveSlider(slideValues, props.fieldName);
+            props.onFilter(props.fieldName, [slideValues.min, slideValues.max]);
           }}
         />
         <input
           type="range"
-          min={props.minMaxValues.min}
-          max={props.minMaxValues.max}
+          min={props.minValue}
+          max={props.maxValue}
           value={slideValues.max}
           onChange={(e) => handleChangeUpperValue(+e.target.value)}
           onMouseUp={() => {
-            props.onMoveSlider(slideValues, props.fieldName);
+            props.onFilter(props.fieldName, [slideValues.min, slideValues.max]);
           }}
           onTouchEnd={() => {
-            props.onMoveSlider(slideValues, props.fieldName);
+            props.onFilter(props.fieldName, [slideValues.min, slideValues.max]);
           }}
         />
       </span>
@@ -63,9 +63,11 @@ const SliderFilter = (props) => {
 };
 
 SliderFilter.propTypes = {
-  minMaxValues: PropTypes.object.isRequired,
-  onMoveSlider: PropTypes.func.isRequired,
-  values: PropTypes.object.isRequired,
+  minValue: PropTypes.number.isRequired,
+  maxValue: PropTypes.number.isRequired,
+  onFilter: PropTypes.func.isRequired,
+  minSelected: PropTypes.number.isRequired,
+  maxSelected: PropTypes.number.isRequired,
   fieldName: PropTypes.string.isRequired,
   units: PropTypes.string.isRequired,
 };

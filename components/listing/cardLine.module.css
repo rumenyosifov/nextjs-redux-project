@@ -3,17 +3,18 @@
   margin-bottom: 10px;
   border: solid 1px #cccccc;
   border-radius: 3px;
-  cursor: pointer;
   background-color: white;
-}
-.imageClass {
-  max-height: 153px;
-  margin: auto;
 }
 .imageDiv {
   display: flex;
   margin: 7px;
   flex: 0 1 230px;
+}
+.imageDiv > a {
+  margin: auto;
+}
+.imageClass {
+  max-height: 153px;
 }
 .info {
   display: flex;
