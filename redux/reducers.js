@@ -83,8 +83,8 @@ const filterData = (storeData = {}, routerQuery = {}) => {
     height: heightsSelected,
     weight: weightsSelected,
     page: +routerQuery.page || 1,
-    perPage: +routerQuery.perPage || PER_PAGE_ARRAY[0],
-    order: routerQuery.order || SORT_ORDER_ARRAY[0].field,
+    perPage: +routerQuery.perPage || PER_PAGE_ARRAY[0].value,
+    order: routerQuery.order || SORT_ORDER_ARRAY[0].value,
     view: routerQuery.view || "grid",
   };
   const filtersData = {
@@ -102,7 +102,7 @@ const filterData = (storeData = {}, routerQuery = {}) => {
     ? routerQuery.order.charAt(0) === "-"
       ? routerQuery.order.substring(1)
       : routerQuery.order
-    : SORT_ORDER_ARRAY[0].field;
+    : SORT_ORDER_ARRAY[0].value;
   const orderDesc = routerQuery.order && routerQuery.order.charAt(0) === "-" ? true : false;
 
   //order data
@@ -142,8 +142,8 @@ const initialDataState = {
     height: [],
     weight: [],
     page: 1,
-    perPage: PER_PAGE_ARRAY[0],
-    order: SORT_ORDER_ARRAY[0].field,
+    perPage: PER_PAGE_ARRAY[0].value,
+    order: SORT_ORDER_ARRAY[0].value,
     view: "grid",
   },
   filtersData: {

@@ -1,0 +1,72 @@
+.dropdown {
+  position: relative;
+}
+.dropdown .label {
+  position: absolute;
+  padding-left: 3px;
+  font-size: 0.8rem;
+  top: -14px;
+  font-style: italic;
+}
+.dropdown .label + button {
+  min-width: 50px;
+  text-align: left;
+}
+.dropdown button {
+  position: relative;
+  height: 100%;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  font-size: 0.9rem;
+}
+.dropdown button::after {
+  content: "";
+  display: inline-block;
+  cursor: pointer;
+  padding: 3px;
+  margin: 0 0 2px 8px;
+  border-style: solid;
+  border-color: #000;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  transition: 0.3s;
+}
+.dropdown button:focus {
+  outline: none;
+}
+.dropdown.opened button::after {
+  transform: rotate(225deg);
+}
+.dropdown ul {
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  top: -20px;
+  background-color: #fff;
+  border: solid 1px #aaa;
+  opacity: 0;
+  cursor: pointer;
+  pointer-events: none;
+  width: max-content;
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.dropdown.opened ul {
+  opacity: 1;
+  top: 25px;
+  pointer-events: all;
+}
+
+.dropdown li {
+  list-style: none;
+  padding: 5px 10px;
+}
+
+.dropdown li.selected {
+  background-color: #aaa;
+}
+
+.dropdown li:hover {
+  background-color: #eee;
+}

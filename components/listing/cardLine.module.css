@@ -7,20 +7,23 @@
 }
 .imageDiv {
   display: flex;
-  margin: 7px;
   flex: 0 1 230px;
 }
 .imageDiv > a {
-  margin: auto;
+  display: flex;
+  align-items: center;
 }
 .imageClass {
-  max-height: 153px;
+  object-fit: cover;
+  border-radius: 3px 0 0 3px;
+  height: 190px;
+  width: 100%;
 }
 .info {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 5px;
+  padding: 5px 10px;
   flex: 1;
   text-align: center;
 }
@@ -89,10 +92,6 @@
   .imageDiv {
     flex: 0 1 auto;
   }
-  .imageClass {
-    max-height: 227px;
-    max-width: 100%;
-  }
 }
 
 @media (max-width: 768px) {
@@ -104,5 +103,8 @@
     border-top: solid 1px #ccc;
     margin-top: 5px;
     padding-left: 0;
+  }
+  .imageClass {
+    height: 270px;
   }
 }

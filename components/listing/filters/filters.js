@@ -4,6 +4,7 @@ import Checkbox from "./checkbox";
 import styles from "./filters.module.css";
 import FilterBox from "./filterBox";
 import SliderFilter from "./sliderFilter";
+import DropDown from "../dropDown";
 
 const Filters = (props) => {
   const [nameFilter, setNameFilter] = useState(props.filtersSelected.name);
@@ -24,17 +25,14 @@ const Filters = (props) => {
         </span>
       </div>
       <FilterBox title="City">
-        <select
-          className={styles.dropdown}
-          onChange={(e) => props.onFilter("city", e.target.value)}
-          value={props.filtersSelected.city}
-        >
-          {props.citiesOptions.map((elem) => (
-            <option className={styles.dropdownOption} key={elem} value={elem}>
-              {elem}
-            </option>
-          ))}
-        </select>
+        <div className={styles.orderDropDown}>
+          <DropDown
+            onChangeDropDown={props.onFilter}
+            value={props.filtersSelected.city}
+            field="city"
+            options={props.citiesOptions.map((val) => ({ value: val, text: val }))}
+          />
+        </div>
       </FilterBox>
       <FilterBox
         title="Name"
@@ -56,30 +54,34 @@ const Filters = (props) => {
         onClearFilter={() => props.onFilter("professions", [])}
         showClearFilter={props.filtersSelected.professions.length !== 0}
       >
-        {props.professionsOptions.map((profession, key) => (
-          <Checkbox
-            key={key}
-            field="professions"
-            value={profession}
-            checked={props.filtersSelected.professions.indexOf(profession) !== -1}
-            onFilter={props.onFilter}
-          />
-        ))}
+        <div className={styles.filterBoxBigContent}>
+          {props.professionsOptions.map((profession, key) => (
+            <Checkbox
+              key={key}
+              field="professions"
+              value={profession}
+              checked={props.filtersSelected.professions.indexOf(profession) !== -1}
+              onFilter={props.onFilter}
+            />
+          ))}
+        </div>
       </FilterBox>
       <FilterBox
         title="Hair Color"
         onClearFilter={() => props.onFilter("hair_color", [])}
         showClearFilter={props.filtersSelected.hair_color.length !== 0}
       >
-        {props.hairColorsOptions.map((hairColor, key) => (
-          <Checkbox
-            key={key}
-            field="hair_color"
-            value={hairColor}
-            checked={props.filtersSelected.hair_color.indexOf(hairColor) !== -1}
-            onFilter={props.onFilter}
-          />
-        ))}
+        <div className={styles.filterBoxBigContent}>
+          {props.hairColorsOptions.map((hairColor, key) => (
+            <Checkbox
+              key={key}
+              field="hair_color"
+              value={hairColor}
+              checked={props.filtersSelected.hair_color.indexOf(hairColor) !== -1}
+              onFilter={props.onFilter}
+            />
+          ))}
+        </div>
       </FilterBox>
       <FilterBox
         title="Age"

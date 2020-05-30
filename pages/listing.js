@@ -27,7 +27,7 @@ export const Listing = () => {
     let filters = Object.assign({}, filtersSelected);
     if (field !== "page") delete filters.page;
     if (filters.perPage === PER_PAGE_ARRAY[0]) delete filters.perPage;
-    if (filters.order === SORT_ORDER_ARRAY[0].field) delete filters.order;
+    if (filters.order === SORT_ORDER_ARRAY[0].value) delete filters.order;
     if (filters.view === "grid") delete filters.view;
 
     switch (field) {
@@ -52,6 +52,7 @@ export const Listing = () => {
       case "height":
       case "weight":
         if (
+          value &&
           value.length &&
           (value[0] !== filtersData.minMaxSliders[field].min || value[1] !== filtersData.minMaxSliders[field].max)
         ) {
@@ -75,7 +76,7 @@ export const Listing = () => {
         }
         break;
       case "order":
-        if (value === SORT_ORDER_ARRAY[0].field) {
+        if (value === SORT_ORDER_ARRAY[0].value) {
           delete filters[field];
         } else {
           filters[field] = value;

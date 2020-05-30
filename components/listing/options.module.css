@@ -13,12 +13,12 @@
   margin: 6px 0;
 }
 
-.options select,
 .options button {
   margin: 0 3px;
 }
 
-.options button {
+.options .showFilter,
+.options .gridButton {
   padding: 5px 10px;
   text-align: center;
   line-height: 0;
@@ -30,10 +30,14 @@
   border: 0px;
 }
 
+.buttons .orderDropDown,
+.buttons .perPageDropDown {
+  margin: 5px 3px 0 3px;
+}
+
 .buttons {
   display: flex;
   justify-content: flex-end;
-  flex: 1;
   margin: 10px -3px;
 }
 .gridButton.active {

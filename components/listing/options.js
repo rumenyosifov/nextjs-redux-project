@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./options.module.css";
 import PropTypes from "prop-types";
 import cn from "classnames";
+import DropDown from "./dropDown";
 import { PER_PAGE_ARRAY, SORT_ORDER_ARRAY } from "../../lib/constants";
 import { MdFormatListBulleted, MdApps } from "react-icons/md";
 
@@ -12,24 +13,24 @@ const Options = (props) => {
         <h3>Results: {props.dataCount}</h3>
       </div>
       <div className={styles.buttons}>
-        <select
-          className={styles.orderDropdown}
-          onChange={(e) => props.onFilter("order", e.target.value)}
-          value={props.order}
-        >
-          {SORT_ORDER_ARRAY.map((elem) => (
-            <option key={elem.field} value={elem.field}>
-              {elem.text}
-            </option>
-          ))}
-        </select>
-        <select onChange={(e) => props.onFilter("perPage", e.target.value)} value={props.perPage}>
-          {PER_PAGE_ARRAY.map((elem) => (
-            <option key={elem} value={elem}>
-              {elem}
-            </option>
-          ))}
-        </select>
+        <div className={styles.orderDropDown}>
+          <DropDown
+            onChangeDropDown={props.onFilter}
+            value={props.order}
+            field="order"
+            label="sort by"
+            options={SORT_ORDER_ARRAY}
+          />
+        </div>
+        <div className={styles.perPageDropDown}>
+          <DropDown
+            onChangeDropDown={props.onFilter}
+            value={props.perPage}
+            field="perPage"
+            label="per page"
+            options={PER_PAGE_ARRAY}
+          />
+        </div>
         <button
           className={cn(styles.gridButton, { [styles.active]: props.view === "line" })}
           onClick={() => props.onFilter("view", "line")}
