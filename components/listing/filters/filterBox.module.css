@@ -8,6 +8,15 @@
   border-radius: 3px;
   background-color: white;
 }
+.box .filterContent {
+  margin-top: 10px;
+  max-height: 500px;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in;
+}
+.box.contentHidden .filterContent {
+  max-height: 0;
+}
 .head {
   display: flex;
   justify-content: space-between;
@@ -18,7 +27,7 @@
   padding: 0px 10px;
   cursor: pointer;
 }
-.arrow::after {
+.box .arrow::after {
   border-style: solid;
   border-width: 0 2px 2px 0;
   content: "";
@@ -27,30 +36,25 @@
   padding: 3px;
   transform: rotate(225deg);
   vertical-align: middle;
-  transition: 0.3s;
+  transition: transform 0.3s;
 }
-
-.filterContent {
-  margin-top: 10px;
-}
-.contentHidden .filterContent {
-  display: none;
-}
-.contentHidden .arrow::after {
+.box.contentHidden .arrow::after {
   transform: rotate(45deg);
 }
-.clearFilter {
+
+.box .clearFilter {
+  display: flex;
+  overflow: hidden;
   cursor: pointer;
-  display: none;
+  height: 0;
   place-content: center;
   align-items: center;
   background-color: #f1f1f1;
-  height: 45px;
   margin: 10px -15px -10px;
-  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  transition: height 0.3s ease-in;
 }
-.clearFilter.active {
-  display: flex;
+.box .clearFilter.active {
+  height: 45px;
 }
 .closeButton {
   display: inline-block;

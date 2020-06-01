@@ -13,26 +13,21 @@
   margin: 6px 0;
 }
 
-.options button {
-  margin: 0 3px;
-}
-
-.options .showFilter,
-.options .gridButton {
+.options .showFilter {
   padding: 5px 10px;
   text-align: center;
-  line-height: 0;
   text-decoration: none;
   font-size: 1rem;
   cursor: pointer;
   background-color: #2196f3;
   color: white;
   border: 0px;
+  outline: none;
 }
 
 .buttons .orderDropDown,
 .buttons .perPageDropDown {
-  margin: 5px 3px 0 3px;
+  margin: 5px 5px 0 5px;
 }
 
 .buttons {
@@ -40,8 +35,31 @@
   justify-content: flex-end;
   margin: 10px -3px;
 }
-.gridButton.active {
+.viewButtons {
+  margin: 0 5px;
+}
+.viewButtons .active {
   background-color: #75c2ff;
+  box-shadow: inset 0px 0px 5px #2da1ff;
+  cursor: auto;
+}
+.viewButtons button {
+  height: 100%;
+  font-size: 19px;
+  line-height: 12.67px;
+  border: 0;
+  padding: 0px 10px;
+  color: #fff;
+  background-color: #2196f3;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s;
+}
+.viewButtons button:first-child {
+  border-radius: 3px 0 0 3px;
+}
+.viewButtons button:last-child {
+  border-radius: 0 3px 3px 0;
 }
 
 @media (min-width: 992px) {
@@ -68,7 +86,10 @@
   .orderDropdown {
     max-width: 115px;
   }
-  .gridButton.active {
+  .viewButtons .active {
     display: none;
+  }
+  .options .viewButtons button {
+    border-radius: 3px;
   }
 }

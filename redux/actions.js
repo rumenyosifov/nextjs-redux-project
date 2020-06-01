@@ -10,8 +10,8 @@ export const fetchTownData = (query) => (dispatch, getState) => {
       .then((data) => dispatch({ type: types.REQUEST_DATA_SUCCESS, data, query }))
       .catch((data) => dispatch({ type: types.REQUEST_DATA_ERROR, data }));
   } else {
-    return setTimeout(() => {
+    Promise.resolve().then(() => {
       dispatch({ type: types.REQUEST_DATA_SUCCESS, query });
-    }, 0);
+    });
   }
 };

@@ -17,6 +17,7 @@
   object-fit: cover;
   border-radius: 3px 0 0 3px;
   height: 190px;
+  min-height: 100%;
   width: 100%;
 }
 .info {
@@ -105,6 +106,6 @@
     padding-left: 0;
   }
   .imageClass {
-    height: 270px;
+    height: 227px;
   }
 }

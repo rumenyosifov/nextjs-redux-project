@@ -31,18 +31,20 @@ const Options = (props) => {
             options={PER_PAGE_ARRAY}
           />
         </div>
-        <button
-          className={cn(styles.gridButton, { [styles.active]: props.view === "line" })}
-          onClick={() => props.onFilter("view", "line")}
-        >
-          <MdFormatListBulleted />
-        </button>
-        <button
-          className={cn(styles.gridButton, { [styles.active]: props.view === "grid" })}
-          onClick={() => props.onFilter("view", "grid")}
-        >
-          <MdApps />
-        </button>
+        <div className={styles.viewButtons}>
+          <button
+            className={cn(styles.gridButton, { [styles.active]: props.view === "line" })}
+            onClick={props.view !== "line" ? () => props.onFilter("view", "line") : undefined}
+          >
+            <MdFormatListBulleted />
+          </button>
+          <button
+            className={cn(styles.gridButton, { [styles.active]: props.view === "grid" })}
+            onClick={props.view !== "grid" ? () => props.onFilter("view", "grid") : undefined}
+          >
+            <MdApps />
+          </button>
+        </div>
         <button className={styles.showFilter} onClick={() => props.setShowFilter(!props.showFilter)}>
           Filters
         </button>
