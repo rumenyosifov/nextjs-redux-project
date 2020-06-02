@@ -9,11 +9,6 @@
   margin-right: -10px;
   display: inline-block;
 }
-
-.filterBoxBigContent {
-  overflow-y: auto;
-  max-height: 300px;
-}
 .form {
   margin: 0 auto;
   padding: 7px;

@@ -4,12 +4,14 @@
 .dropdown .label {
   position: absolute;
   font-size: 0.8rem;
-  top: -14px;
+  top: -10px;
   font-style: italic;
 }
 .dropdown .label + button {
   min-width: 50px;
   text-align: left;
+  padding: 7px 7px;
+  cursor: pointer;
 }
 .dropdown button {
   position: relative;

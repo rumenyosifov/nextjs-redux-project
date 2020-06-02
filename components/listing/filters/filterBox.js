@@ -11,7 +11,7 @@ const FilterBox = (props) => {
         <span className={styles.text}>{props.title}</span>
         <span className={styles.arrow}></span>
       </div>
-      <div className={styles.filterContent}>{props.children}</div>
+      <div className={cn(styles.filterContent, { [styles.bigContent]: props.overflowContent })}>{props.children}</div>
       {typeof props.onClearFilter == "function" && (
         <div
           className={cn(styles.clearFilter, { [styles.active]: props.showClearFilter })}
@@ -29,6 +29,7 @@ const FilterBox = (props) => {
 FilterBox.propTypes = {
   title: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
+  overflowContent: PropTypes.bool,
   showClearFilter: PropTypes.bool,
   onClearFilter: PropTypes.func,
 };

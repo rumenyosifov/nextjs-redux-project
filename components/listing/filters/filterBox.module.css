@@ -1,6 +1,6 @@
 .box {
   border: 1px solid #dee2e6;
-  padding: 10px 15px;
+  padding: 10px 10px;
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
@@ -10,12 +10,15 @@
 }
 .box .filterContent {
   margin-top: 10px;
-  max-height: 500px;
-  overflow: hidden;
+  max-height: 300px;
   transition: max-height 0.3s ease-in;
 }
 .box.contentHidden .filterContent {
   max-height: 0;
+  overflow: hidden;
+}
+.box .filterContent.bigContent {
+  overflow: auto;
 }
 .head {
   display: flex;
@@ -50,7 +53,7 @@
   place-content: center;
   align-items: center;
   background-color: #f1f1f1;
-  margin: 10px -15px -10px;
+  margin: 10px -10px -10px;
   transition: height 0.3s ease-in;
 }
 .box .clearFilter.active {

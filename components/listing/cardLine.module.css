@@ -11,6 +11,7 @@
 }
 .imageDiv > a {
   display: flex;
+  flex: 1;
   align-items: center;
 }
 .imageClass {

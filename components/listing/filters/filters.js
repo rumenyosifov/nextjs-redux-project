@@ -20,7 +20,7 @@ const Filters = (props) => {
   return (
     <>
       <div className={styles.divCloseButton}>
-        <span className={styles.closeButton} onClick={() => props.setShowFilter(!props.showFilter)}>
+        <span className={styles.closeButton} onClick={() => props.setShowFilter(false)}>
           &times;
         </span>
       </div>
@@ -37,6 +37,7 @@ const Filters = (props) => {
       <FilterBox
         title="Name"
         onClearFilter={() => props.onFilter("name", "")}
+        overflowContent={true}
         showClearFilter={!!props.filtersSelected.name}
       >
         <input
@@ -52,40 +53,39 @@ const Filters = (props) => {
       <FilterBox
         title="Profession"
         onClearFilter={() => props.onFilter("professions", [])}
+        overflowContent={true}
         showClearFilter={props.filtersSelected.professions.length !== 0}
       >
-        <div className={styles.filterBoxBigContent}>
-          {props.professionsOptions.map((profession, key) => (
-            <Checkbox
-              key={key}
-              field="professions"
-              value={profession}
-              checked={props.filtersSelected.professions.indexOf(profession) !== -1}
-              onFilter={props.onFilter}
-            />
-          ))}
-        </div>
+        {props.professionsOptions.map((profession, key) => (
+          <Checkbox
+            key={key}
+            field="professions"
+            value={profession}
+            checked={props.filtersSelected.professions.indexOf(profession) !== -1}
+            onFilter={props.onFilter}
+          />
+        ))}
       </FilterBox>
       <FilterBox
         title="Hair Color"
+        overflowContent={true}
         onClearFilter={() => props.onFilter("hair_color", [])}
         showClearFilter={props.filtersSelected.hair_color.length !== 0}
       >
-        <div className={styles.filterBoxBigContent}>
-          {props.hairColorsOptions.map((hairColor, key) => (
-            <Checkbox
-              key={key}
-              field="hair_color"
-              value={hairColor}
-              checked={props.filtersSelected.hair_color.indexOf(hairColor) !== -1}
-              onFilter={props.onFilter}
-            />
-          ))}
-        </div>
+        {props.hairColorsOptions.map((hairColor, key) => (
+          <Checkbox
+            key={key}
+            field="hair_color"
+            value={hairColor}
+            checked={props.filtersSelected.hair_color.indexOf(hairColor) !== -1}
+            onFilter={props.onFilter}
+          />
+        ))}
       </FilterBox>
       <FilterBox
         title="Age"
         onClearFilter={() => props.onFilter("age", [])}
+        overflowContent={true}
         showClearFilter={
           !!props.filtersSelected.age.length &&
           (props.filtersSelected.age[0] !== props.minMaxSliders.age.min ||
@@ -104,6 +104,7 @@ const Filters = (props) => {
       </FilterBox>
       <FilterBox
         title="Height"
+        overflowContent={true}
         onClearFilter={() => props.onFilter("height", [])}
         showClearFilter={
           !!props.filtersSelected.height.length &&
@@ -123,6 +124,7 @@ const Filters = (props) => {
       </FilterBox>
       <FilterBox
         title="Weight"
+        overflowContent={true}
         onClearFilter={() => props.onFilter("weight", [])}
         showClearFilter={
           !!props.filtersSelected.weight.length &&
@@ -142,6 +144,7 @@ const Filters = (props) => {
       </FilterBox>
       <FilterBox
         title="Gender"
+        overflowContent={true}
         onClearFilter={() => props.onFilter("gender", [])}
         showClearFilter={!!props.filtersSelected.gender.length}
       >
@@ -168,7 +171,6 @@ Filters.propTypes = {
   professionsOptions: PropTypes.array.isRequired,
   hairColorsOptions: PropTypes.array.isRequired,
   minMaxSliders: PropTypes.object.isRequired,
-  showFilter: PropTypes.bool.isRequired,
   onFilter: PropTypes.func.isRequired,
   setShowFilter: PropTypes.func.isRequired,
 };
